@@ -8,9 +8,15 @@ type Node struct {
 }
 
 func main() {
-	head := new(Node)
-	head.data = 0
-	//addToHead(head)
+	var head *Node
+
+	fmt.Println("show linked list which add to head")
+	head = new(Node)
+	addToHead(head)
+	showNode(head)
+
+	fmt.Println("show linked list which add to tail")
+	head = new(Node)
 	addToTail(head)
 	showNode(head)
 }
