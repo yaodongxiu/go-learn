@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5dcc7513-a4ce-4ee4-8929-01090da1d878" name="Default Changelist" comment="" />
+    <list default="true" id="5dcc7513-a4ce-4ee4-8929-01090da1d878" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/10.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/structure/linked-list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/11.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/interface/11.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/12.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/interface/12.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/13.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/interface/13.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/14.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/interface/14.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +22,11 @@
     </option>
   </component>
   <component name="GOROOT" url="file:///usr/lib/go-1.13" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1lxujjIYRH3lDOuXPORa6KX0LIr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -29,8 +40,25 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test/structure" />
+      <recent name="$PROJECT_DIR$/test/interface" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
