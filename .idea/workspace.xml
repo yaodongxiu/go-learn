@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5dcc7513-a4ce-4ee4-8929-01090da1d878" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/10.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/structure/linked-list" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/11.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/interface/11.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/12.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/interface/12.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/13.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/interface/13.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/14.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/interface/14.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structure/queue.go" beforeDir="false" afterPath="$PROJECT_DIR$/structure/queue.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structure/stack.go" beforeDir="false" afterPath="$PROJECT_DIR$/structure/LinkStack.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +18,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file:///usr/lib/go-1.13" />
+  <component name="GOROOT" url="file:///usr/lib/go-1.11" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -60,5 +57,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
