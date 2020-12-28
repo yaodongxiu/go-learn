@@ -7,20 +7,6 @@ type Node struct {
 	next *Node
 }
 
-func main() {
-	var head *Node
-
-	fmt.Println("show linked list which add to head")
-	head = new(Node)
-	addToHead(head)
-	showNode(head)
-
-	fmt.Println("show linked list which add to tail")
-	head = new(Node)
-	addToTail(head)
-	showNode(head)
-}
-
 func showNode(p *Node) {
 	for p != nil {
 		fmt.Println(*p)
@@ -45,4 +31,18 @@ func addToTail(head *Node) *Node {
 		tail = &node
 	}
 	return head
+}
+
+func main() {
+	var head *Node
+
+	fmt.Println("show linked list which add to head")
+	head = new(Node)
+	addToHead(head)
+	showNode(head)
+
+	fmt.Println("show linked list which add to tail")
+	head = new(Node)
+	addToTail(head)
+	showNode(head)
 }

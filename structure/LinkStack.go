@@ -8,13 +8,13 @@ type StackNode struct {
 }
 
 type LinkStack struct {
-	stackTop StackNode
+	stackTop *StackNode
 	length   int
 }
 
 type StackInterface interface {
-	Pop() int
 	Push(data int)
+	Pop() int
 	Clear()
 }
 
@@ -23,10 +23,10 @@ func (stack *LinkStack) Push(data int) {
 
 	node := StackNode{}
 	node.data = data
-	node.next = &stack.stackTop
-	stack.stackTop = node
+	node.next = stack.stackTop
+	stack.stackTop = &node
 
-	fmt.Println(fmt.Sprintf("push data => %d", data))
+	fmt.Println(fmt.Sprintf("stack push data => %d", data))
 }
 
 func (stack *LinkStack) Pop() int {
@@ -36,7 +36,7 @@ func (stack *LinkStack) Pop() int {
 
 	stack.length--
 	popData := stack.stackTop.data
-	stack.stackTop = *stack.stackTop.next
+	stack.stackTop = stack.stackTop.next
 	return popData
 }
 
@@ -46,17 +46,14 @@ func (stack *LinkStack) Clear() {
 		if popData == -999 {
 			break
 		} else {
-			fmt.Println(fmt.Sprintf("pop data => %d", popData))
+			fmt.Println(fmt.Sprintf("stack pop data => %d", popData))
 		}
 	}
 }
 
 func createLinkStack() *LinkStack {
 	return &LinkStack{
-		StackNode{
-			0,
-			nil,
-		},
+		nil,
 		0,
 	}
 }
@@ -64,7 +61,8 @@ func createLinkStack() *LinkStack {
 func main() {
 	var stack StackInterface
 	stack = createLinkStack()
-
-	stack.Push(1)
+	for i := 1; i <= 10; i++ {
+		stack.Push(i)
+	}
 	stack.Clear()
 }
