@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"math"
 )
@@ -17,4 +18,9 @@ func IntFromFloat64(x float64) int {
 }
 
 func main() {
+	var x float64
+	x = math.MinInt32 - 1
+	IntFromFloat64(x)
+	//fmt.Println(x)
+	context.Background()
 }
