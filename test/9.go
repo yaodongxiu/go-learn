@@ -2,15 +2,19 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func main() {
-	tracer := "死神来了, 狙击bye bye"
-	comma := strings.Index(tracer, ", ")
-	pos := strings.Index(tracer[comma:], "死神")
-
-	fmt.Println(comma, pos, tracer[comma+pos:])
-	fmt.Println(tracer[14:])
-	fmt.Println(tracer[0:7])
+	var m map[int]string
+	var ptr *int
+	var c chan int
+	var sl []int
+	var f func()
+	var i interface{}
+	fmt.Printf("%#v\n", m)
+	fmt.Printf("%#v\n", ptr)
+	fmt.Printf("%#v\n", c)
+	fmt.Printf("%#v\n", sl)
+	fmt.Printf("%#v\n", f)
+	fmt.Printf("%#v\n", i)
 }
