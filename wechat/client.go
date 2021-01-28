@@ -1,4 +1,3 @@
-// netcat 是一个简单的TCP服务器读/写客户端
 package main
 
 import (
@@ -13,15 +12,15 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	done := make(chan struct{})
+	done := make(chan string)
 	go func() {
-		io.Copy(os.Stdout, conn) // 注意：忽略错误
+		io.Copy(os.Stdout, conn)
 		log.Println("done")
-		done <- struct{}{} // 向主Goroutine发出信号
+		done <- "ok"
 	}()
 	mustCopy(conn, os.Stdin)
 	conn.Close()
-	<-done // 等待后台goroutine完成
+	<-done
 }
 
 func mustCopy(dst io.Writer, src io.Reader) {

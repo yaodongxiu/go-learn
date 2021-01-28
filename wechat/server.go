@@ -19,7 +19,7 @@ func main() {
 			log.Print(err)
 			continue
 		}
-		go handleConn(conn)
+		go handleConnection(conn)
 	}
 }
 
@@ -34,22 +34,22 @@ func broadcaster() {
 	clients := make(map[client]bool)
 	for {
 		select {
+		case cli := <-entering:
+			clients[cli] = true
+		case cli := <-leaving:
+			delete(clients, cli)
+			close(cli)
 		case msg := <-messages:
 			// 把所有接收到的消息广播给所有客户端
 			// 发送消息通道
 			for cli := range clients {
 				cli <- msg
 			}
-		case cli := <-entering:
-			clients[cli] = true
-		case cli := <-leaving:
-			delete(clients, cli)
-			close(cli)
 		}
 	}
 }
 
-func handleConn(conn net.Conn) {
+func handleConnection(conn net.Conn) {
 	ch := make(chan string) // 对外发送客户消息的通道
 	go clientWriter(conn, ch)
 	who := conn.RemoteAddr().String()
@@ -70,6 +70,6 @@ func handleConn(conn net.Conn) {
 
 func clientWriter(conn net.Conn, ch <-chan string) {
 	for msg := range ch {
-		fmt.Fprintln(conn, msg) // 注意：忽略网络层面的错误
+		fmt.Fprintln(conn, msg)
 	}
 }
