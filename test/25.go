@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 func main() {
@@ -38,6 +39,7 @@ func main() {
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func() {
+			time.Sleep(time.Second)
 			fmt.Println("C语言中文网")
 			wg.Done()
 		}()

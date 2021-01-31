@@ -43,13 +43,14 @@ func main() {
 
 	jsonData := getJsonData()
 
-	fmt.Printf(string(jsonData))
+	fmt.Printf(string(jsonData) + "\n")
 
 	screenAndTouch := struct {
 		Screen
 		HasTouchID bool
 	}{}
 
+	// 解码，并通过引用结构体的实例 进行 反序列化
 	err := json.Unmarshal(jsonData, &screenAndTouch)
 
 	if err != nil {

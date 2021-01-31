@@ -14,7 +14,8 @@ func main() {
 			select {
 			case num := <-ch:
 				fmt.Println("num = ", num)
-			case <-time.After(3 * time.Second):
+				// select机制  超时处理
+			case <-time.After(5 * time.Second):
 				fmt.Println("超时")
 				quit <- true
 			}

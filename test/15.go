@@ -8,6 +8,7 @@ import (
 func printTypeValue(slist ...interface{}) string {
 	// 字节缓冲作为快速字符串连接
 	var b bytes.Buffer
+	fmt.Println(b.Cap())
 	// 遍历参数
 	for _, s := range slist {
 		// 将interface{}类型格式化为字符串
@@ -34,6 +35,8 @@ func printTypeValue(slist ...interface{}) string {
 		// 写入换行符
 		b.WriteString("\n")
 	}
+	fmt.Println(b.Cap())
+
 	return b.String()
 }
 
