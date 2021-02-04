@@ -41,12 +41,6 @@ func handleMultiForm(w http.ResponseWriter, req *http.Request) {
 
 // 处理application/json类型的POST请求
 func handlePostJson(w http.ResponseWriter, req *http.Request) {
-	for name, headers := range req.Header {
-		for _, h := range headers {
-			fmt.Fprintf(w, "%v: %v\n", name, h)
-		}
-	}
-
 	var user map[string]interface{}
 	body, _ := ioutil.ReadAll(req.Body)
 	json.Unmarshal(body, &user)
