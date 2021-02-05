@@ -76,8 +76,8 @@ func TestConvertString() {
 }
 
 func main() {
-	//TestMath()
-	//TestTrimString()
+	TestMath()
+	TestTrimString()
 	TestConvertString()
 }
 
