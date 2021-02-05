@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"unicode/utf8"
 )
 
 func dd(data ...interface{}) {
@@ -44,8 +45,8 @@ func TestTrimString() {
 	dd(strings.TrimLeft(str, "!"))
 	dd(strings.TrimRight(str, "!"))
 
-	dd(filepath.Dir("c:/testweb/home.php"))
-	dd(path.Dir("c:/testweb/home.php"))
+	dd(filepath.Dir("c:/test/home.php"))
+	dd(path.Dir("c:/test/home.php"))
 
 	dd(strings.HasPrefix("ftp://192.168.10.1", "ftp"))
 	dd(strings.HasSuffix("NLT_abc.jpg", "jpg"))
@@ -63,18 +64,10 @@ func TestConvertString() {
 	dd(i, str, bytes)
 
 	raw := "Hello World"
-	dd(fmt.Sprintf("%s%s", raw, strings.Repeat(".", 20-len(raw))))
-
-	split := strings.Split(raw, "l")
-	dd(split)
-	dd(strings.Join(split, "l"))
-
-	dd(reverseString(raw))
-
-	// 将字符串解析成变量 将字符串解析成变量
-	params, _ := url.ParseQuery("id=23&name=John%20Adams")
-	dd(params)
-
+	dd(str_pad(raw, 20, "."))
+	dd(str_repeat(".", 13))
+	dd(strrev(raw))
+	dd(parse_str("id=23&name=John%20Adams"))
 	dd(strconv.FormatInt(int64(i), 2))
 	dd(strings.ToUpper(raw))
 	dd(strings.ToLower(raw))
@@ -83,16 +76,29 @@ func TestConvertString() {
 }
 
 func main() {
-	TestMath()
-	TestTrimString()
+	//TestMath()
+	//TestTrimString()
 	TestConvertString()
 }
 
-// reverseString 字符串翻转
-func reverseString(s string) string {
-	runes := []rune(s)
-	for from, to := 0, len(runes)-1; from < to; from, to = from+1, to-1 {
-		runes[from], runes[to] = runes[to], runes[from]
+func str_pad(str string, length int, pad string) string {
+	//return str + strings.Repeat(pad, length-utf8.RuneCountInString(str))
+	return fmt.Sprintf("%s%s", str, strings.Repeat(pad, length-utf8.RuneCountInString(str)))
+}
+
+func str_repeat(str string, count int) string {
+	return strings.Repeat(str, count)
+}
+
+func strrev(str string) string {
+	runes := []rune(str)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
 	}
 	return string(runes)
+}
+
+func parse_str(query string) interface{} {
+	params, _ := url.ParseQuery(query)
+	return params
 }
