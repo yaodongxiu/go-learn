@@ -18,6 +18,8 @@ func dd(data ...interface{}) {
 
 // TestMath 数学函数
 func TestMath() {
+	dd("-----TestMath-----")
+
 	dd(math.Abs(-4.2))
 	dd(math.Ceil(9.999))
 	dd(math.Floor(9.999))
@@ -29,10 +31,14 @@ func TestMath() {
 	dd(math.Min(1, 7))
 	dd(rand.Intn(200) - 100)
 	dd(math.Pi)
+
+	dd()
 }
 
 // TestTrimString 去空格或或其他字符
 func TestTrimString() {
+	dd("-----TestTrimString-----")
+
 	str := "!Hello World!!"
 	dd(strings.Trim(str, "!"))
 	dd(strings.TrimLeft(str, "!"))
@@ -43,10 +49,14 @@ func TestTrimString() {
 
 	dd(strings.HasPrefix("ftp://192.168.10.1", "ftp"))
 	dd(strings.HasSuffix("NLT_abc.jpg", "jpg"))
+
+	dd()
 }
 
 // TestConvertString 字符串生成与转化
 func TestConvertString() {
+	dd("-----TestConvertString-----")
+
 	i := 123
 	str := strconv.Itoa(i)
 	bytes := []byte(str)
@@ -68,11 +78,13 @@ func TestConvertString() {
 	dd(strconv.FormatInt(int64(i), 2))
 	dd(strings.ToUpper(raw))
 	dd(strings.ToLower(raw))
+
+	dd()
 }
 
 func main() {
-	//TestMath()
-	//TestTrimString()
+	TestMath()
+	TestTrimString()
 	TestConvertString()
 }
 
