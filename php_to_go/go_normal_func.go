@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"go-learn/php2go"
 	"math"
 	"math/rand"
 	"net/url"
@@ -79,6 +80,7 @@ func main() {
 	TestMath()
 	TestTrimString()
 	TestConvertString()
+	dd(php2go.NumberFormat(1234567890.77777, 4, ".", ",,"))
 }
 
 func str_pad(str string, length int, pad string) string {
