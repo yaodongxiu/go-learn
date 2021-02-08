@@ -1,12 +1,20 @@
 package main
 
 import (
+	"crypto/md5"
+	"crypto/sha1"
+	"encoding/base64"
+	"encoding/hex"
+	"encoding/json"
 	"fmt"
+	"hash/crc32"
+	"io/ioutil"
 	"net/url"
 	"strconv"
 	"strings"
 	"time"
 	"unicode"
+	"unicode/utf8"
 )
 
 //////////// Date/Time Functions ////////////
@@ -199,19 +207,16 @@ func NumberFormat(number float64, decimals uint, decPoint, thousandsSep string) 
 		prefix = str
 	}
 	sep := []byte(thousandsSep)
-	n, l1, l2 := 0, len(prefix), len(sep)
-	// thousands sep num
-	c := (l1 - 1) / 3
-	tmp := make([]byte, l2*c+l1)
-	pos := len(tmp) - 1
-	for i := l1 - 1; i >= 0; i, n, pos = i-1, n+1, pos-1 {
-		if l2 > 0 && n > 0 && n%3 == 0 {
+	l1, l2 := len(prefix), len(sep)
+	tmp := make([]byte, l2*((l1-1)/3)+l1)
+	for i, pos := 0, len(tmp)-1; i < l1; i, pos = i+1, pos-1 {
+		if l2 > 0 && i > 0 && i%3 == 0 {
 			for j := range sep {
-				tmp[pos] = sep[l2-j-1]
+				tmp[pos] = sep[l2-1-j]
 				pos--
 			}
 		}
-		tmp[pos] = prefix[i]
+		tmp[pos] = prefix[l1-1-i]
 	}
 	s := string(tmp)
 	if dec > 0 {
@@ -235,22 +240,24 @@ func NumberFormat(number float64, decimals uint, decPoint, thousandsSep string) 
 //func Wordwrap(str string, width uint, br string, cut bool) string {
 //
 //}
-//
-//func Strlen(str string) int {
-//
-//}
-//
-//func MbStrlen(str string) int {
-//
-//}
-//
-//func StrRepeat(input string, multiplier int) string {
-//
-//}
-//
-//func Strstr(haystack string, needle string) string {
-//
-//}
+
+func Strlen(str string) int {
+	return len(str)
+}
+
+func MbStrlen(str string) int {
+	return utf8.RuneCountInString(str)
+}
+
+func StrRepeat(input string, multiplier int) string {
+	return strings.Repeat(input, multiplier)
+}
+
+func Strstr(haystack string, needle string) string {
+	index := strings.Index(haystack, needle)
+	return haystack[index:]
+}
+
 //
 //func Strtr(haystack string, params ...interface{}) string {
 //
@@ -259,43 +266,53 @@ func NumberFormat(number float64, decimals uint, decPoint, thousandsSep string) 
 //func StrShuffle(str string) string {
 //
 //}
-//
-//func Trim(str string, characterMask ...string) string {
-//
-//}
-//
-//func Ltrim(str string, characterMask ...string) string {
-//
-//}
-//
-//func Rtrim(str string, characterMask ...string) string {
-//
-//}
-//
-//func Explode(delimiter, str string) []string {
-//
-//}
-//
-//func Chr(ascii int) string {
-//
-//}
-//
-//func Ord(char string) int {
-//
-//}
-//
+
+func Trim(str string, characterMask ...string) string {
+	if len(characterMask) == 0 {
+		return strings.TrimSpace(str)
+	}
+	return strings.Trim(str, characterMask[0])
+}
+
+func Ltrim(str string, characterMask ...string) string {
+	if len(characterMask) == 0 {
+		return strings.TrimLeftFunc(str, unicode.IsSpace)
+	}
+	return strings.TrimLeft(str, characterMask[0])
+}
+
+func Rtrim(str string, characterMask ...string) string {
+	if len(characterMask) == 0 {
+		return strings.TrimRightFunc(str, unicode.IsSpace)
+	}
+	return strings.TrimRight(str, characterMask[0])
+}
+
+func Explode(delimiter, str string) []string {
+	return strings.Split(str, delimiter)
+}
+
+func Chr(ascii int) string {
+	return string(rune(ascii))
+}
+
+func Ord(char string) int {
+	r, _ := utf8.DecodeRune([]byte(char))
+	return int(r)
+}
+
 //func Nl2br(str string, isXhtml bool) string {
 //
 //}
-//
-//func JSONDecode(data []byte, val interface{}) error {
-//
-//}
-//
-//func JSONEncode(val interface{}) ([]byte, error) {
-//
-//}
-//
+
+func JSONDecode(data []byte, val interface{}) error {
+	return json.Unmarshal(data, val)
+}
+
+func JSONEncode(val interface{}) ([]byte, error) {
+	return json.Marshal(val)
+}
+
 //func Addslashes(str string) string {
 //
 //}
@@ -315,27 +332,43 @@ func NumberFormat(number float64, decimals uint, decPoint, thousandsSep string) 
 //func HTMLEntityDecode(str string) string {
 //
 //}
-//
-//func Md5(str string) string {
-//
-//}
-//
-//func Md5File(path string) (string, error) {
-//
-//}
-//
-//func Sha1(str string) string {
-//
-//}
-//
-//func Sha1File(path string) (string, error) {
-//
-//}
-//
-//func Crc32(str string) uint32 {
-//
-//}
-//
+
+func Md5(str string) string {
+	hash := md5.New()
+	hash.Write([]byte(str))
+	return hex.EncodeToString(hash.Sum(nil))
+}
+
+func Md5File(path string) (string, error) {
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	hash := md5.New()
+	hash.Write(data)
+	return hex.EncodeToString(hash.Sum(nil)), nil
+}
+
+func Sha1(str string) string {
+	hash := sha1.New()
+	hash.Write([]byte(str))
+	return hex.EncodeToString(hash.Sum(nil))
+}
+
+func Sha1File(path string) (string, error) {
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	hash := sha1.New()
+	hash.Write(data)
+	return hex.EncodeToString(hash.Sum(nil)), nil
+}
+
+func Crc32(str string) uint32 {
+	return crc32.ChecksumIEEE([]byte(str))
+}
+
 //func Levenshtein(str1, str2 string, costIns, costRep, costDel int) int {
 //
 //}
@@ -351,15 +384,15 @@ func NumberFormat(number float64, decimals uint, decPoint, thousandsSep string) 
 //func ParseURL(str string, component int) (map[string]string, error) {
 //
 //}
-//
-//func URLEncode(str string) string {
-//
-//}
-//
-//func URLDecode(str string) (string, error) {
-//
-//}
-//
+
+func URLEncode(str string) string {
+	return url.QueryEscape(str)
+}
+
+func URLDecode(str string) (string, error) {
+	return url.QueryUnescape(str)
+}
+
 //func Rawurlencode(str string) string {
 //
 //}
@@ -371,15 +404,21 @@ func NumberFormat(number float64, decimals uint, decPoint, thousandsSep string) 
 //func HTTPBuildQuery(queryData url.Values) string {
 //
 //}
-//
-//func Base64Encode(str string) string {
-//
-//}
-//
-//func Base64Decode(str string) (string, error) {
-//
-//}
-//
+
+func Base64Encode(str string) string {
+	return base64.StdEncoding.EncodeToString([]byte(str))
+}
+
+func Base64Decode(str string) (string, error) {
+	bytes, err := base64.StdEncoding.DecodeString(str)
+	if err != nil {
+		return "", err
+	}
+	return string(bytes), nil
+}
+
+//////////// Array(Slice/Map) Functions ////////////
+
 //func ArrayFill(startIndex int, num uint, value interface{}) map[int]interface{} {
 //
 //}

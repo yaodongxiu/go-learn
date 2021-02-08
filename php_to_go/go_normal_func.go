@@ -3,7 +3,6 @@ package main
 
 import (
 	"fmt"
-	"go-learn/php2go"
 	"math"
 	"math/rand"
 	"net/url"
@@ -77,10 +76,13 @@ func TestConvertString() {
 }
 
 func main() {
-	TestMath()
-	TestTrimString()
-	TestConvertString()
-	dd(php2go.NumberFormat(1234567890.77777, 4, ".", ",,"))
+	//TestMath()
+	//TestTrimString()
+	//TestConvertString()
+	//dd(php2go.NumberFormat(1234567890.77777, 4, ".", "。，"))
+	//dd(php2go.Strstr("xxx@gmail.com", "@g"))
+	//dd(php2go.Strstr("Hello world!", "world"))
+	//dd(php2go.Chr(122))
 }
 
 func str_pad(str string, length int, pad string) string {
