@@ -24,8 +24,9 @@ Josie
 
 	// Prepare some data to insert into the template.
 	type Recipient struct {
-		Name, Gift string
-		Attended   bool
+		Name     string
+		Gift     string
+		Attended bool
 	}
 	var recipients = []Recipient{
 		{"Aunt Mildred", "bone china tea set", true},

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
 	"time"
 )
@@ -34,6 +35,7 @@ func main() {
 	//	<-done
 	//}
 
+	runtime.GOMAXPROCS(10)
 	var wg sync.WaitGroup
 	// 开N个后台打印线程
 	for i := 0; i < 10; i++ {
