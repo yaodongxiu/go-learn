@@ -15,6 +15,12 @@ type File struct {
 	fileData int
 }
 
+type Image struct {
+	File
+	size int32
+	ext  string
+}
+
 func (f *File) getFileData() int {
 	return f.fileData
 }
@@ -34,6 +40,13 @@ func (f *File) close() {
 }
 
 func main() {
+	image := &Image{
+		File: File{
+			fileData: 111,
+		},
+	}
+	fmt.Println(image.getFileData())
+
 	// 声明一个DataWriter的接口
 	var file FileInterface
 

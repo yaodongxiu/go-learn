@@ -7,7 +7,7 @@ import (
 
 // encode and decode
 func main() {
-	message := "sdfsdfdsf"
+	message := "sdfsdfds是f"
 	encodeMessage := base64.StdEncoding.EncodeToString([]byte(message))
 	fmt.Println(encodeMessage)
 	data, err := base64.StdEncoding.DecodeString(encodeMessage)

@@ -7,6 +7,7 @@ import (
 )
 
 const (
+	_ = iota
 	a = iota
 	b = iota
 	c = iota
