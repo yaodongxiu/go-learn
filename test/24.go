@@ -23,14 +23,14 @@ func takeStep2() {
 	fmt.Println(555)
 	cv.L.Lock()
 	fmt.Println(666)
-	//cv.Wait()
-	//fmt.Println(777)
-	//cv.L.Unlock()
-	//fmt.Println(888)
+	cv.Wait()
+	fmt.Println(777)
+	cv.L.Unlock()
+	fmt.Println(888)
 }
 
 func main() {
-	runtime.GOMAXPROCS(3)
+	runtime.GOMAXPROCS(4)
 	go takeStep1()
 	go takeStep2()
 	time.Sleep(time.Second * 3)

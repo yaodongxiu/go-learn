@@ -5,6 +5,7 @@ import "fmt"
 func main() {
 	var a interface{}
 	a = 100
+	// 类型断言（Type Assertion）
 	value, ok := a.(int)
 	fmt.Println(value, ok)
 
