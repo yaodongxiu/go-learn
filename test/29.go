@@ -17,6 +17,7 @@ func main() {
 		close(c)
 	}()
 	for v := range c {
+		fmt.Println("for...")
 		fmt.Println(v)
 	}
 	aaa, bbb := test()

@@ -16,13 +16,14 @@ type Battery struct {
 
 }
 
-func getJsonData() []byte {
+type ScreenAndTouch struct {
+	Screen
+	Battery
+	HasTouchID bool
+}
 
-	raw := &struct {
-		Screen
-		Battery
-		HasTouchID bool
-	}{
+func getJsonData() []byte {
+	raw := &ScreenAndTouch{
 		Screen: Screen{
 			Size: 5.5,
 			ResX: 1920,
@@ -45,10 +46,7 @@ func main() {
 
 	fmt.Printf(string(jsonData) + "\n")
 
-	screenAndTouch := struct {
-		Screen
-		HasTouchID bool
-	}{}
+	var screenAndTouch ScreenAndTouch
 
 	// 解码，并通过引用结构体的实例 进行 反序列化
 	err := json.Unmarshal(jsonData, &screenAndTouch)

@@ -10,4 +10,18 @@ func main() {
 	str = "123"
 	fmt.Println(str)
 
+	aaa := "asdf中文"
+	var bytess []byte
+	bytess = []byte(aaa)
+	fmt.Println(bytess)
+	fmt.Println(string(bytess))
+	var runess []rune
+	runess = []rune(aaa)
+	fmt.Println(runess)
+	fmt.Println(string(runess))
+
+	sss1, err := fmt.Printf("value => %s", "sss_value")
+	sss2 := fmt.Sprintf("value => %s", "sss_value")
+	fmt.Println(sss1, err, sss2)
+
 }

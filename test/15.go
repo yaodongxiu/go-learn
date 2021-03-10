@@ -9,20 +9,20 @@ func printTypeValue(slist ...interface{}) string {
 	var buf bytes.Buffer
 	fmt.Println(buf.Cap())
 	for _, v := range slist {
-		str := fmt.Sprintf("%v", v)
-		var tye string
+		itemValueString := fmt.Sprintf("%v", v)
+		var itemType string
 		switch v.(type) {
 		case int:
-			tye = "int"
+			itemType = "int"
 		case string:
-			tye = "string"
+			itemType = "string"
 		case bool:
-			tye = "bool"
+			itemType = "bool"
 		}
 		buf.WriteString("value: ")
-		buf.WriteString(str)
+		buf.WriteString(itemValueString)
 		buf.WriteString(" type: ")
-		buf.WriteString(tye)
+		buf.WriteString(itemType)
 		buf.WriteString("\n")
 	}
 	fmt.Println(buf.Cap())

@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type BaseQuestion struct {
 	QuestionId      int
@@ -71,6 +73,9 @@ func fetchFromChoiceTableNil(id int) (data *ChoiceQuestion) {
 
 func fetchQuestionNil(id int) interface{} {
 	data1 := fetchFromChoiceTableNil(id) // 根据ID到选择题表中找题目
+	//if data1 == nil {
+	//	return nil
+	//}
 	return data1
 }
 

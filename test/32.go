@@ -23,9 +23,10 @@ func ProtectRun(entry func()) {
 			fmt.Println("error:", err)
 		}
 	}()
-	entry()
+	entry()          // 宕机点
 	fmt.Println(666) // 这一句没有执行，因为有 panic 也有 recover，程序不会宕机，执行完对应的 defer 后，从宕机点退出当前函数后继续执行
 }
+
 func main() {
 	fmt.Println("运行前")
 	// 允许一段手动触发的错误
