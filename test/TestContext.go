@@ -3,22 +3,42 @@ package main
 import (
 	"context"
 	"fmt"
+	"time"
 )
 
-func main() {
-	type favContextKey string // 定义一个key类型
-	// f:一个从上下文中根据key取value的函数
-	f := func(ctx context.Context, k favContextKey) {
-		if v := ctx.Value(k); v != nil {
-			fmt.Println("found value:", v)
-			return
-		}
-		fmt.Println("key not found:", k)
-	}
-	k := favContextKey("language")
-	// 创建一个携带key为k，value为"Go"的上下文
-	ctx := context.WithValue(context.Background(), k, "Go")
+type Options struct {
+	Interval time.Duration
+}
 
-	f(ctx, k)
-	f(ctx, favContextKey("color"))
+func reqTask(ctx context.Context, name string) {
+	for {
+		select {
+		case <-ctx.Done():
+			fmt.Println("stop", name)
+			return
+		default:
+			fmt.Println(name, "send request")
+			op := ctx.Value("options").(*Options)
+			time.Sleep(op.Interval * time.Second)
+			op.Interval = 2
+		}
+	}
+}
+
+func main() {
+	// 创建可取消的 Context 对象，即可以主动通知子协程退出
+	//ctx, cancel := context.WithCancel(context.Background())
+	//ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)                  // 超时退出
+	ctx, cancel := context.WithDeadline(context.Background(), time.Now().Add(8*time.Second)) // 最迟退出时间
+	vCtx := context.WithValue(ctx, "options", &Options{3})                                   // 往子协程中传递参数
+
+	// 控制单个或多个协程
+	go reqTask(vCtx, "worker1")
+	go reqTask(vCtx, "worker2")
+
+	time.Sleep(10 * time.Second)
+	fmt.Println("before cancel")
+	cancel()
+	fmt.Println(vCtx.Value("options").(*Options))
+	time.Sleep(3 * time.Second)
 }
