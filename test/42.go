@@ -19,6 +19,8 @@ type Item struct {
 func main() {
 	a := []int{1, 2, 3}
 	b := a
+	b = append(b, 4)
+	fmt.Println(b)
 	b = nil
 	fmt.Println(a, b)
 
