@@ -42,8 +42,8 @@ func main() {
 
 	for {
 		fmt.Println(0)
-		cv.Broadcast() // 唤醒全部协程
-		//cv.Signal()    // 唤醒一个协程
+		//cv.Broadcast() // 唤醒全部协程
+		cv.Signal() // 唤醒一个协程
 		time.Sleep(time.Second)
 	}
 }
