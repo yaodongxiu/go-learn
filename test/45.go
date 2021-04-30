@@ -9,6 +9,8 @@ type aaaa struct {
 func main() {
 	a := &aaaa{}
 	fmt.Println(a)
+	g := a
+	fmt.Println(a, g)
 	var b *aaaa
 	fmt.Println(b)
 	a = nil
