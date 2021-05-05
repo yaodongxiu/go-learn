@@ -25,9 +25,9 @@ func main() {
 
 type client chan<- string // 对外发送消息的通道
 var (
-	entering = make(chan client)
-	leaving  = make(chan client)
-	messages = make(chan string) // 所有连接的客户端
+	entering = make(chan client, 99)
+	leaving  = make(chan client, 99)
+	messages = make(chan string, 99) // 所有连接的客户端
 )
 
 func broadcaster() {
@@ -50,6 +50,7 @@ func broadcaster() {
 }
 
 func handleConn(conn net.Conn) {
+	defer conn.Close()
 	ch := make(chan string) // 对外发送客户消息的通道
 	go clientWriter(conn, ch)
 	who := conn.RemoteAddr().String()
@@ -65,7 +66,6 @@ func handleConn(conn net.Conn) {
 	// 注意：忽略 input.Err() 中可能的错误
 	leaving <- ch
 	messages <- who + " 下线"
-	conn.Close()
 }
 
 func clientWriter(conn net.Conn, ch <-chan string) {

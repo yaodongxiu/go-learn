@@ -10,17 +10,17 @@ import (
 
 func main() {
 	conn, err := net.Dial("tcp", "localhost:9601")
+	defer conn.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
-	done := make(chan struct{})
+	done := make(chan int, 1)
 	go func() {
 		io.Copy(os.Stdout, conn) // 注意：忽略错误
 		log.Println("done")
-		done <- struct{}{} // 向主Goroutine发出信号
+		done <- 1 // 向主Goroutine发出信号
 	}()
 	mustCopy(conn, os.Stdin)
-	conn.Close()
 	<-done // 等待后台goroutine完成
 }
 
