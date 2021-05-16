@@ -3,7 +3,7 @@ package do
 import "fmt"
 
 const (
-	_                  = iota
+	_ = iota
 	ChoiceQuestionType
 	BlankQuestionType
 )
@@ -104,7 +104,7 @@ func printQuestion() {
 	if data, ok := fetchQuestion(1001); ok {
 		var questionPrefix string
 
-		switch  data.GetQuestionType() {
+		switch data.GetQuestionType() {
 		case ChoiceQuestionType:
 			questionPrefix = "选择题"
 		case BlankQuestionType:

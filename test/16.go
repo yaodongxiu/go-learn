@@ -35,4 +35,25 @@ func main() {
 	fmt.Printf("%+v\n", c)
 	c.Engine.Size = 100
 	fmt.Printf("%+v\n", c)
+
+	w1 := Wheel{1}
+	var w2 Wheel
+	w2 = w1 // 这里其实是结构体拷贝，不是同一个结构体的引用
+	if &w1 == &w2 {
+		fmt.Println("&w1 equals to &w2")
+	}
+
+	if w1 == w2 { // 比较俩个结构体的属性
+		fmt.Println("w1 equals to w2")
+	}
+
+	w2.Size = 2
+	if w1 == w2 {
+		fmt.Println("w1 equals to w2 after changing w2")
+	}
+
+	a := [3]int{1, 2, 3}
+	b := a
+	b[0] = 666
+	fmt.Println(a)
 }
