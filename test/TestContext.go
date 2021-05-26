@@ -31,12 +31,12 @@ func main() {
 	//ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)                  // 超时退出
 	ctx, cancel := context.WithDeadline(context.Background(), time.Now().Add(8*time.Second)) // 最迟退出时间
 	vCtx := context.WithValue(ctx, "options", &Options{3})                                   // 往子协程中传递参数
-
+	fmt.Println(ctx.Deadline())
 	// 控制单个或多个协程
 	go reqTask(vCtx, "worker1")
 	go reqTask(vCtx, "worker2")
 
-	time.Sleep(10 * time.Second)
+	time.Sleep(7 * time.Second)
 	fmt.Println("before cancel")
 	cancel()
 	fmt.Println(vCtx.Value("options").(*Options))

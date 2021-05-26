@@ -10,26 +10,20 @@ const (
 	Cancel
 )
 
+var BookingTypeMap = map[BookingType]string{
+	Default: "默认",
+	Finish:  "落位完成",
+	Cancel:  "取消落位",
+}
+
 func main() {
-	fmt.Println(Default, Finish, Cancel)
 	var bookingType1 BookingType = Default
-	var bookingType2 BookingType = Finish
-	var bookingType3 BookingType = Cancel
-	fmt.Println(bookingType1)
-	fmt.Println(bookingType2)
-	fmt.Println(bookingType3)
-	aaa := "aaa"
-	aaa = aaa + bookingType2.String()
-	fmt.Println(aaa)
+	fmt.Println(bookingType1.String())
 }
 
 func (bt BookingType) String() string {
-	switch bt {
-	case Finish:
-		return "落位完成"
-	case Cancel:
-		return "取消落位"
-	default:
-		return "默认"
+	if msg, ok := BookingTypeMap[bt]; ok {
+		return msg
 	}
+	return ""
 }
