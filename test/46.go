@@ -7,8 +7,11 @@ import (
 
 func main() {
 	dd := make(chan int, 1)
+	dd <- 666
 	close(dd) // chan close 后，不再有阻塞的效果，而且无论chan是有缓冲或者没有缓冲的，close后，vv=0， ok=false
+	fmt.Println(len(dd))
 	vv, ok := <-dd
+	fmt.Println(len(dd))
 	fmt.Println(ok)   // false
 	fmt.Println(vv)   // 0
 	fmt.Println(<-dd) // 0
