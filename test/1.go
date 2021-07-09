@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
 	// 标准格式
@@ -26,4 +29,14 @@ func main() {
 
 	// output:
 	// 0  4.4 2.2 0 false 0 (0+0i) 1 2
+
+	// '1' 类型可以自动在rune和byte间转换适配
+	var ii int
+	ii = 101
+	str := strconv.Itoa(ii)
+	for i, v := range str {
+		fmt.Println(v)
+		fmt.Println(v == '1')
+		fmt.Println(str[i] == '1')
+	}
 }
