@@ -1,0 +1,44 @@
+syntax = "proto3";
+package main;
+option go_package = "./";
+import "other.proto";
+
+// this is a comment
+message Student {
+  reserved 2;
+  string name = 1;
+  bool male = 3;
+  repeated int32 scores = 4;
+}
+
+message Student2 {
+  string name = 1;
+  enum Gender {
+    FEMALE = 0;
+    MALE = 1;
+  }
+  Gender gender = 2;
+  repeated int32 scores = 3;
+}
+
+message EnumAllowAlias {
+  enum Status {
+    option allow_alias = true;
+    UNKOWN = 0;
+    STARTED = 1;
+    RUNNING = 1;
+  }
+}
+
+message SearchResponse2 {
+  message Result2 {
+    string url = 1;
+    string title = 2;
+    repeated string snippets = 3;
+  }
+  repeated Result2 results = 1;
+}
+
+message SearchResponse3 {
+  repeated Result3 results = 1;
+}
