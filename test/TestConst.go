@@ -5,7 +5,7 @@ import "fmt"
 type BookingType int
 
 const (
-	Default = iota
+	Default BookingType = iota
 	Finish
 	Cancel
 )
@@ -17,7 +17,7 @@ var BookingTypeMap = map[BookingType]string{
 }
 
 func main() {
-	var bookingType1 BookingType = Default
+	bookingType1 := Finish
 	fmt.Println(bookingType1.String())
 }
 

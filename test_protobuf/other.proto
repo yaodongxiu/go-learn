@@ -1,0 +1,54 @@
+syntax = "proto3";
+package main;
+option go_package = "./";
+import "google/protobuf/any.proto";
+
+message Result3 {
+  string url = 1;
+  string title = 2;
+  repeated string snippets = 3;
+}
+
+message ErrorStatus {
+  string message = 1;
+  repeated google.protobuf.Any details = 2;
+}
+
+message SampleMessage {
+  oneof test_oneof {
+    string name = 4;
+    Result3 sub_message = 9;
+  }
+}
+
+message MapRequest {
+  map<string, int32> points = 1;
+}
+
+message SearchRequest {
+  map<string, int32> points = 1;
+}
+
+message Result {
+  string url = 1;
+  string title = 2;
+  repeated string snippets = 3;
+}
+
+message SearchResponse {
+  repeated Result results = 1;
+}
+
+message Result4 {
+  string url = 1;
+  string title = 2;
+  repeated string snippets = 3;
+}
+
+
+service SearchService {
+  rpc Search (Result4) returns (SearchResponse);
+}
+
+service FooService{
+}
